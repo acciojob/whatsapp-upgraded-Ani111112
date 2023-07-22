@@ -49,7 +49,7 @@ public class WhatsappService {
         try {
             return whatsappRepository.removeUser(user);
         }catch (RuntimeException e) {
-            return -2;
+            return 0;
         }
     }
 

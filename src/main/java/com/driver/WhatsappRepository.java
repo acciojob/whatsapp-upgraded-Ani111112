@@ -121,7 +121,6 @@ public class WhatsappRepository {
         List<Integer>messageIdList = userToMessgae.get(user.getMobile());
         String groupName = userToGroup.get(user.getMobile());
         List<User> users = groupsMap.get(groupName);
-        this.messageCount -= userToMessgae.get(userMobile).size();
         userToMessgae.remove(userMobile);
         userToGroup.remove(userMobile);
         for (User user1 : users) {
@@ -133,12 +132,13 @@ public class WhatsappRepository {
         List<Message> messageList = messageInGroup.get(groupName);
         for (Message message : messageList) {
             if (messageIdList.contains(message.getId())) {
+                this.messageCount -= 1;
                 messageList.remove(message);
             }
         }
         messageInGroup.put(groupName, messageList);
 
-        totalMessage = messageCount + users.size() + messageList.size();
+        totalMessage = this.messageCount + users.size() + messageList.size();
         return totalMessage;
     }
 
